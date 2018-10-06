@@ -3,6 +3,14 @@
 #include "game_state_editor"
 #include "main.hpp"
 
+GameStateStart::GameStateStart()
+{
+    sf::Vector2f pos = sf::Vector2f(Game::window.getSize());
+    this->view.setSize(pos);
+    pos *= 0.5f;
+    this->view.setCenter(pos);
+}
+
 void GameStateStart::draw(const float dt)
 {
     Game::window.setView(this->view);
@@ -36,10 +44,25 @@ void GameStateStart::handleInput()
             {
                 view.setSize(event.size.width, event.size.height);
                 Game::background.setPosition(Game::window.mapPixelToCoords(sf::Vector2i(0, 0)));
-                Game::background.setScale(float(event.size.height) / float(
+                Game::background.setScale(
+                        float(event.size.width) 
+                        / float(Game::background.getTexture()->getSize().x),
+                        float(event.size.height) 
+                        / float(Game::background.getTexture()->getSize().y));
+                break;
+            }
+
+            case sf::Event::KeyPressed:
+            {
+                if (event.key.code == sf::Keyboard::Escape) Game::window.close();
+                break;
+            }
+
+            default: break;
 
             }
         }
 
     }
+    return;
 }
