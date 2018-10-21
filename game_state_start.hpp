@@ -18,4 +18,4 @@ class GameStateStart : public GameState
         virtual void handleInput();
 
         GameStateStart();
-}
+};

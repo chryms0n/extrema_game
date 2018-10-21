@@ -1,6 +1,6 @@
 #include "game_state.hpp"
 #include "game_state_start.hpp"
-#include "game_state_editor"
+#include "game_state_editor.hpp"
 #include "main.hpp"
 
 GameStateStart::GameStateStart()

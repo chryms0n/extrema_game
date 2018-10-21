@@ -1,20 +1,18 @@
-
-#include <stack>
-#include <SFML/Graphics.hpp>
-
-#include "game_state.hpp"
-#include "main.h"
+#include "main.hpp"
 
 using namespace Game;
 
 int main()
 {
-    window(sf::VideoMode(800, 600), "City Builder");
+    std::stack<GameState*> states;
+    sf::RenderWindow window(sf::VideoMode(800, 600), "City Builder");
     window.setFramerateLimit(60);
     sf::CircleShape circle(100.f);
     circle.setFillColor(sf::Color::Red);
 
     sf::Clock clock;
+
+    pushState(new GameStateStart());
 
     while (window.isOpen())
     {
@@ -22,7 +20,7 @@ int main()
         sf::Time elapsed = clock.restart();
         float dt = elapsed.asSeconds();
 
-        if (peekState() == nullptr) continue;
+        //if (peekState() == nullptr) continue;
         peekState()->handleInput();
         peekState()->update(dt);
         
@@ -43,12 +41,12 @@ int main()
     return 0;
 }
 
-void pushState(GameState* state)
+void Game::pushState(GameState* state)
 {
     states.push(state);
 }
 
-void popState()
+void Game::popState()
 {
     delete states.top();
     states.pop();
@@ -56,7 +54,7 @@ void popState()
     return;
 }
 
-void changeState(GameState* state)
+void Game::changeState(GameState* state)
 {
     if (!states.empty())
         popState();
@@ -65,7 +63,7 @@ void changeState(GameState* state)
     return;
 }
 
-GameState* peekState()
+GameState* Game::peekState()
 {
     if (states.empty()) return nullptr;
     return states.top();

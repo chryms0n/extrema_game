@@ -1,3 +1,5 @@
+#ifndef GAME_STATE_HPP
+#define GAME_STATE_HPP
 
 
 class GameState
@@ -9,3 +11,4 @@ class GameState
         virtual void handleInput() = 0;
 
 };
+#endif

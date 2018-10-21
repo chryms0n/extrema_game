@@ -1,5 +1,10 @@
 // main.hpp
-//
+
+#include <stack>
+#include <SFML/Graphics.hpp>
+
+#include "game_state.hpp"
+
 namespace Game
 {
     void pushState(GameState* state);
@@ -7,6 +12,8 @@ namespace Game
     void changeState(GameState* state);
     GameState* peekState();
 
-    std::stack<GameState*>states;
-    sf::RenderWindow window;
+    extern std::stack<GameState*>states;
+    extern sf::RenderWindow window;
+    extern sf::Clock clock;
 }
+

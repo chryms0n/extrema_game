@@ -13,8 +13,9 @@ void print(std::string str)
 
 int main()
 {
-    print("Hallo Welt");
 
+    print("Hallo Welt");
+    print("Hallo Welt");
 }
 
 
