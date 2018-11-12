@@ -1,13 +1,13 @@
 // game state editor c++ source file
 
-#include "./game_state.hpp"
 #include "./game_state_editor.hpp"
+#include "main.hpp"
 
 GameStateEditor::GameStateEditor()
 {
-    sf::Vector2f pos = Game::window.getSize();
+    sf::Vector2f pos = sf::Vector2f(Game::window.getSize());
     this->gameView.setSize(pos);
-    this.guiView.setSize(pos);
+    this->guiView.setSize(pos);
     pos *= 0.5f;
     this->gameView.setCenter(pos);
     this->guiView.setCenter(pos);
@@ -30,9 +30,9 @@ void GameStateEditor::handleInput()
 {
     sf::Event event;
 
-    while(Game::pollEvent(event))
+    while(Game::window.pollEvent(event))
     {
-        switch event.type()
+        switch (event.type)
         {
             case sf::Event::Closed:
             {

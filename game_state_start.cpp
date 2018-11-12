@@ -1,4 +1,3 @@
-#include "game_state.hpp"
 #include "game_state_start.hpp"
 #include "game_state_editor.hpp"
 #include "main.hpp"
@@ -9,6 +8,12 @@ GameStateStart::GameStateStart()
     this->view.setSize(pos);
     pos *= 0.5f;
     this->view.setCenter(pos);
+}
+
+void GameStateStart::loadGame()
+{
+    Game::pushState((new GameStateEditor()));
+    return;
 }
 
 void GameStateStart::draw(const float dt)
@@ -55,14 +60,14 @@ void GameStateStart::handleInput()
             case sf::Event::KeyPressed:
             {
                 if (event.key.code == sf::Keyboard::Escape) Game::window.close();
+                else if (event.key.code == sf::Keyboard::Escape) this->loadGame();
                 break;
             }
 
             default: break;
 
-            }
         }
-
     }
     return;
 }
+

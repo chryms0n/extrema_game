@@ -1,42 +1,42 @@
 #include "main.hpp"
 
-using namespace Game;
+
+std::stack<GameState*> Game::states = std::stack<GameState*>();
+sf::RenderWindow Game::window(sf::VideoMode(800, 600), "City Builder");
+
+sf::Sprite Game::background;
+
+sf::Clock Game::clock;
 
 int main()
 {
-    std::stack<GameState*> states;
-    sf::RenderWindow window(sf::VideoMode(800, 600), "City Builder");
-    window.setFramerateLimit(60);
-    sf::CircleShape circle(100.f);
-    circle.setFillColor(sf::Color::Red);
+    Game::window.setFramerateLimit(60);
 
-    sf::Clock clock;
+    Game::pushState(new GameStateStart());
 
-    pushState(new GameStateStart());
-
-    while (window.isOpen())
+    while (Game::window.isOpen())
     {
         // The main game loop
-        sf::Time elapsed = clock.restart();
+        sf::Time elapsed = Game::clock.restart();
         float dt = elapsed.asSeconds();
 
         //if (peekState() == nullptr) continue;
-        peekState()->handleInput();
-        peekState()->update(dt);
+        Game::peekState()->handleInput();
+        Game::peekState()->update(dt);
         
         sf::Event event;
-        while (window.pollEvent(event))
+        while (Game::window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
-                window.close();
+                Game::window.close();
         }
 
-        window.clear();
-        window.draw(circle);
-        window.display();
+        Game::window.clear();
+        //window.draw(circle);
+        Game::window.display();
     }
 
-    while(!states.empty()) popState();
+    while(!Game::states.empty()) Game::popState();
 
     return 0;
 }
@@ -68,3 +68,11 @@ GameState* Game::peekState()
     if (states.empty()) return nullptr;
     return states.top();
 }
+
+void loadTextures()
+{
+    Textures::loadTexture("background","./media/background.png");
+
+}
+
+

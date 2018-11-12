@@ -1,9 +1,14 @@
 // main.hpp
+#ifndef MAIN_HPP
+#define MAIN_HPP
 
-#include <stack>
 #include <SFML/Graphics.hpp>
+#include <stack>
 
-#include "game_state.hpp"
+#include "./game_state.hpp"
+#include "./game_state_start.hpp"
+#include "./game_state_editor.hpp"
+#include "./texture_manager.hpp"
 
 namespace Game
 {
@@ -12,8 +17,13 @@ namespace Game
     void changeState(GameState* state);
     GameState* peekState();
 
-    extern std::stack<GameState*>states;
+    void loadTextures();
+
+    extern std::stack<GameState*> states;
     extern sf::RenderWindow window;
     extern sf::Clock clock;
+
+    extern sf::Sprite background;
 }
 
+#endif

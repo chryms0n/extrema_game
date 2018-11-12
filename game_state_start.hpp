@@ -1,3 +1,5 @@
+#ifndef GAME_STATE_START_HPP
+#define GAME_STATE_START_HPP
 
 #include <SFML/Graphics.hpp>
 
@@ -10,6 +12,7 @@ class GameStateStart : public GameState
     private:
 
         sf::View view;
+        void loadGame();
 
     public:
 
@@ -19,3 +22,6 @@ class GameStateStart : public GameState
 
         GameStateStart();
 };
+
+
+#endif
