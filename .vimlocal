@@ -1,0 +1,2 @@
+set makeprg='make main'
+map <F10> :!./main<CR>
