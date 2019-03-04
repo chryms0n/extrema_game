@@ -3,10 +3,8 @@
 
 int main()
 {
-    createStack();
-    showStack();
-    changeStack();
-    showStack();
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Extrema");
+    
 
-    return 0;
+    return EXIT_SUCCESS;
 }
